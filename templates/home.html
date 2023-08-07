@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div  class="banner">
+                <div class="banner-text">
+                    <h1>ToDo</h1>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-md-6">
+    <form method="POST" class="p-3 shadow">
+        {% csrf_token %}
+        <div class="form-control">
+    <input type="text" class="form-control" name="task" placeholder="TaskName">
+</div>
+<div class="form-control">
+    <input type="text" class="form-control"  name="priority" placeholder="Enter your Priority">
+</div>
+        <div class="form-control">
+             <input type="date" class="form-control"  name="date" placeholder="Enter the date">
+
+        </div>
+        <div class="form-control">
+            <button type="submit"  name=submit class="btn btn-success">Add Task</button>
+        </div>
+    </form>
+
+            </div>
+        <div class="col-md-6">
+            <div class="card bg-light" >
+            <div class="card">
+            <h1 class="card-header">Task to be completed</h1>
+             {% for i in task1 %}
+            <div class="shadow-lg p-3 mb-5 bg-white rounded card">
+                <div class="card-body">
+                    <h4 class="card-title">{{i.name}}</h4>
+                    <p><b>{{i.priority}}</b></p>
+                      <p><b>{{i.date}}</b></p>
+
+                    <a class="btn btn-danger" href="{% url 'delete' i.id %}">Done</a>
+                     <a class="btn btn-warning" href="{% url 'update' i.id %}">Update</a>
+
+                </div>
+
+            </div>
+            {% endfor %}
+        </div>
+        </div>
+    </div>
+        </div>
+</div>
+
+
+
+
+
+
+{% endblock %}
